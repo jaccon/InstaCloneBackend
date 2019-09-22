@@ -11,19 +11,25 @@ module.exports = {
          return res.json(posts);
     },
 
-    // Save images to mongo database
+    // Save images to Mongo database
     async store(req, res){
 
         const { author, place, description, hashtags } = req.body;
         const { filename: image } = req.file;
 
+        // Rename files and preserve the image mimetype
+        const [name] = image.split('.');
+        const fileName = `${name}.jpg`;
+
+        // Resize a image to 500px
         await sharp(req.file.path)
             .resize(500)
             .jpeg({ quality: 70 })
             .toFile(
-                path.resolve(req.file.destination, 'resized', image )
+                path.resolve(req.file.destination, 'resized', fileName )
             )
 
+        // Unlink the full image before resize
         fs.unlinkSync(req.file.path);
 
         const post = await Post.create({
@@ -31,7 +37,7 @@ module.exports = {
             place, 
             description, 
             hashtags,
-            image,
+            image: fileName,
         })
         
         return res.send(post);
