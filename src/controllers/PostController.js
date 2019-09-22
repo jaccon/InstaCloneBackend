@@ -39,6 +39,8 @@ module.exports = {
             hashtags,
             image: fileName,
         })
+
+        req.io.emmit('post', post);
         
         return res.send(post);
 
