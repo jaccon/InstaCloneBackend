@@ -12,6 +12,8 @@ const upload = multer(uploadConfig);
 routes.get('/posts', PostController.index);
 routes.post('/posts', upload.single('image'), PostController.store);
 routes.post('/posts/:id/like', upload.single('image'), LikeController.store);
+
+// Static route to uploads
 routes.use('/files', express.static(path.resolve(__dirname, '..', 'uploads', 'resized'  )));
 
 
