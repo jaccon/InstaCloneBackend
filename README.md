@@ -14,6 +14,7 @@ Instagram Clone example. The script working with:
 - Mongoose ( ^5.7.1 )
 - Socket.io
 - Sharp ( ^0.23.0 )
+- Cors ( ^2.8.5 )
 
 ## Reatures
 - Upload images
