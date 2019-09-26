@@ -40,7 +40,7 @@ module.exports = {
             image: fileName,
         })
 
-        req.io.emmit('post', post);
+         req.io.emit('post', post);//envia uma mensagem com o nome post com todos os dados para io
         
         return res.send(post);
 
